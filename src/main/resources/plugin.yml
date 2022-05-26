@@ -1,0 +1,5 @@
+name: AfterChat
+author: 'AfterMC.pl Team'
+version: '@pluginVersion@'
+description: 'Plugin na zarządzanie czatem w grze'
+main: pl.aftermc.chat.AfterChat

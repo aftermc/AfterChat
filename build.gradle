@@ -1,0 +1,55 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+plugins {
+    id 'idea'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+allprojects {
+    group 'pl.aftermc'
+    version '1.0'
+
+    apply plugin: 'java-library'
+
+    java {
+        withSourcesJar()
+    }
+
+    dependencies {
+        shadow "org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT"
+        implementation "eu.okaeri:okaeri-configs-yaml-bukkit:3.4.2"
+        implementation "eu.okaeri:okaeri-configs-validator-okaeri:3.4.2"
+        implementation "me.mattstudios.utils:matt-framework:1.4.6"
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots" }
+        maven { url "https://storehouse.okaeri.eu/repository/maven-public/" }
+    }
+}
+
+subprojects {
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+processResources {
+    filter(ReplaceTokens, tokens: [
+            pluginVersion: version
+    ])
+}
+
+shadowJar {
+    archiveFileName = "AfterChat ${project.version} (MC 1.8-1.18).jar"
+
+    relocate "eu.okaeri", "pl.aftermc.chat.lib.okaeri"
+    relocate "me.mattstudios.mf", "pl.aftermc.chat.lib.mf"
+}
+
+idea {
+    project {
+        jdkName = "17"
+    }
+}
