@@ -24,6 +24,8 @@ public class PlayerJoin implements Listener {
             if(this.plugin.isNewPluginUpdate()) {
                 ChatUtil.sendMessage(player, "&3AfterChat &8&l- &cDostępna jest nowa wersja pluginu!");
                 ChatUtil.sendURLMessage(player, "&3AfterChat &8&l- &aKliknij na wiadomość aby pobrać najnowszą wersję z githuba", "https://github.com/aftermc/AfterChat/releases");
+            } else {
+                ChatUtil.sendMessage(player, "&3AfterChat &8&l- &aKorzystasz z aktualnej wersji pluginu");
             }
         }
     }
